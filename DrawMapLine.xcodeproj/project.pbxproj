@@ -18,6 +18,8 @@
 		980A71C7175479520086A331 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A71C6175479520086A331 /* Default-568h@2x.png */; };
 		980A71CA175479520086A331 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 980A71C9175479520086A331 /* ViewController.m */; };
 		980A71CD175479520086A331 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980A71CB175479520086A331 /* ViewController.xib */; };
+		980A71D417547A860086A331 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A71D317547A860086A331 /* CoreLocation.framework */; };
+		980A71D617547A8F0086A331 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A71D517547A8F0086A331 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		980A71C8175479520086A331 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		980A71C9175479520086A331 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		980A71CC175479520086A331 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		980A71D317547A860086A331 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		980A71D517547A8F0086A331 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980A71D617547A8F0086A331 /* MapKit.framework in Frameworks */,
+				980A71D417547A860086A331 /* CoreLocation.framework in Frameworks */,
 				980A71B1175479520086A331 /* UIKit.framework in Frameworks */,
 				980A71B3175479520086A331 /* Foundation.framework in Frameworks */,
 				980A71B5175479520086A331 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +79,8 @@
 		980A71AF175479520086A331 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				980A71D517547A8F0086A331 /* MapKit.framework */,
+				980A71D317547A860086A331 /* CoreLocation.framework */,
 				980A71B0175479520086A331 /* UIKit.framework */,
 				980A71B2175479520086A331 /* Foundation.framework */,
 				980A71B4175479520086A331 /* CoreGraphics.framework */,
@@ -212,7 +220,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Hang (G9FVEPPU28)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Hang (G9FVEPPU28)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -227,6 +236,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -258,10 +269,15 @@
 		980A71D1175479520086A331 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guo Hang (G9FVEPPU28)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guo Hang (G9FVEPPU28)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrawMapLine/DrawMapLine-Prefix.pch";
 				INFOPLIST_FILE = "DrawMapLine/DrawMapLine-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1C86D398-1D87-42F7-9030-84394AF679C1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1C86D398-1D87-42F7-9030-84394AF679C1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -272,6 +288,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrawMapLine/DrawMapLine-Prefix.pch";
 				INFOPLIST_FILE = "DrawMapLine/DrawMapLine-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
