@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define MAXIMUM_ZOOM 20
+
 @interface ViewController () {
     UIImageView *imageView;//绘画层
     
@@ -17,11 +19,15 @@
     CLLocationCoordinate2D testLocation;//测试的位置(经纬度)
     
     CGPoint locationConverToImage;//存储转换测试位置的CGPoint
+    
+    NSInteger zoomLevel;
     BOOL isDrawing;
 
 }
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSMutableArray *array;
+@property (nonatomic, retain) NSMutableArray *polylines;
+
 
 
 @end
@@ -32,6 +38,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self.map setDelegate:self];
     
     [self.locationManager startUpdatingLocation];
     self.map.showsUserLocation = YES;
@@ -50,6 +58,328 @@
     
     [self.map setRegion:theRegion animated:YES];
     isDrawing = NO;
+    
+    //---
+    MKPolyline *polyline = nil;
+    CLLocationCoordinate2D points[2];
+    points[0] = CLLocationCoordinate2DMake(0.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(0.0, 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(10.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(10.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(20.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(20.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(30.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(30.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(40.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(40.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(50.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(50.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(60.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(60.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(70.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(70.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(80.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(80.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-10.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-10.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-20.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-20.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-30.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-30.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-40.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-40.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-50.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-50.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-60.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-60.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-70.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-70.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-80.0 , -180.0);
+    points[1] = CLLocationCoordinate2DMake(-80.0 , 180.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    // --longitude
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 0.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 0.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 10.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 10.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 20.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 20.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 30.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 30.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 40.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 40.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 50.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 50.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 60.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 60.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 70.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 70.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 80.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 80.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 90.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 90.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 100.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 100.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 110.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 110.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 120.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 120.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 130.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 130.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 140.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 140.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 150.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 150.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 160.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 160.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , 170.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , 170.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -10.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -10.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -20.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -20.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -30.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -30.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -40.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -40.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -50.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -50.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -60.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -60.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -70.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -70.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -80.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -80.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -90.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -90.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -100.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -100.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -110.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -110.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -120.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -120.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -130.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -130.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -140.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -140.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -150.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -150.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -160.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -160.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+    
+    memset(points, 0, 2*sizeof(CLLocationCoordinate2D));
+    points[0] = CLLocationCoordinate2DMake(-90.0 , -170.0);
+    points[1] = CLLocationCoordinate2DMake(90.0 , -170.0);
+    polyline = [MKPolyline polylineWithCoordinates:points count:2];
+    [self.polylines addObject:polyline];
+
+    
+    [self.map addOverlays:self.polylines];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +391,7 @@
 - (void)dealloc {
     [_map release];
     [_locationManager release];
+    [_polylines release];
     
     [super dealloc];
 }
@@ -85,6 +416,23 @@
         _array = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _array;
+}
+
+- (NSMutableArray *) polylines {
+    if (_polylines == nil) {
+        _polylines = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return _polylines;
+}
+
+#pragma mark - utility methods
+- (NSUInteger)zoomLevelForMapRect:(MKMapRect)mRect withMapViewSizeInPixels:(CGSize)viewSizeInPixels
+{
+    NSUInteger tmp_zoomLevel = MAXIMUM_ZOOM; // MAXIMUM_ZOOM is 20 with MapKit
+    MKZoomScale zoomScale = mRect.size.width / viewSizeInPixels.width; //MKZoomScale is just a CGFloat typedef
+    double zoomExponent = log2(zoomScale);
+    tmp_zoomLevel = (NSUInteger)(MAXIMUM_ZOOM - ceil(zoomExponent));
+    return tmp_zoomLevel;
 }
 
 #pragma mark - IBAction methods
@@ -166,8 +514,29 @@
     
 }
 
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id < MKOverlay >)overlay {
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolylineView *lineview=[[MKPolylineView alloc] initWithOverlay:overlay];
+        lineview.strokeColor=[[UIColor blackColor] colorWithAlphaComponent:0.7];
+        lineview.lineWidth=1.0;
+//        lineview.fillColor= [UIColor redColor];
+        return lineview;
+        
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    zoomLevel = [self zoomLevelForMapRect:mapView.visibleMapRect withMapViewSizeInPixels:mapView.bounds.size];
+    NSLog(@"%d",zoomLevel);
+    return;
+}
+
 #pragma mark - 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (!isDrawing) {
+        return;
+    }
     
     UITouch *touch = [touches anyObject];
     
@@ -181,6 +550,9 @@
     
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (!isDrawing) {
+        return;
+    }
     
     UITouch *touch = [touches anyObject];
     
@@ -205,6 +577,9 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (!isDrawing) {
+        return;
+    }
     
     CGPathCloseSubpath(pathRef);
     
